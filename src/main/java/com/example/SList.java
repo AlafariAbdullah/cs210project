@@ -1,12 +1,5 @@
 package com.example;
 /**
- * * int size
-* TaskNode head
-* Methods:
-    * Insert(TaskNode node)
-    * Remove(TaskNode node)
-    * Search(String taskID)
-    * toString()  
  */
 public class SList {
     int size;
