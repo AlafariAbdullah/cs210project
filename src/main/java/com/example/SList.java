@@ -8,11 +8,11 @@ public class SList {
         this.size = 0;
         this.head = null;
     }
-    public SList(TaskNode node){
-        this.size = 1;
-        this.head = node;
-        node.next = null;
-    } 
+    // public SList(TaskNode node){
+    //     this.size = 1;
+    //     this.head = node;
+    //     node.next = null;
+    // } 
     public void Insert(TaskNode node){
         if(this.head == null){
             this.head = node;
