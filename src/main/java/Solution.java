@@ -29,16 +29,17 @@ public class Solution {
                     break;
 
                 case 3:
-                    System.out.println("[Undo] Reversing last action...");
+                    System.out.println(Colors.RED+"[Undo] Reversing last action...");
                     system.undoLastAction();
                     break;
 
                 case 4:
+                    System.out.println(Colors.YELLOW+"[Audit] Printing Global Sector Index: \n"+Colors.RESET);
                     system.systemAudit();
                     break;
 
                 case 5:
-                    System.out.println("[Deployment History]");
+                    System.out.println(Colors.GREEN+"[Deployment History]"+Colors.RESET);
                     system.printDeploymentHistory();
                     break;
 

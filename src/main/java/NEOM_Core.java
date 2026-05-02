@@ -28,11 +28,11 @@ public class NEOM_Core {
         TaskNode task = sector.tasks.Search(current.taskID);
         if (task == null) return;
         TaskNode archive = new TaskNode(task.sectorID, task.taskID,task.description);
-        System.out.println("[Deployment] Drone dispatched for Task "+task.taskID+ "("+task.description+").");
+        System.out.println(Colors.BLUE+"[Deployment] Drone dispatched for Task "+task.taskID+ "("+task.description+")."+Colors.RESET);
         task.description ="Completed";
 
         history.Append(archive);
-        System.out.println("[Archive] "+ task.taskID +" Saved to Deployment History.");
+        System.out.println(Colors.GREEN+"[Archive] "+ task.taskID +" Saved to Deployment History."+Colors.RESET);
     }
     public void undoLastAction(){
         TaskNode last = undoLog.Pop();
@@ -52,10 +52,9 @@ public class NEOM_Core {
                 if (!current.taskID.equals(last.taskID)) deployment.Enqueue(current);
             }
         }
-        System.out.println("[Taks] "+last.taskID+ " has been removed from sector "+ last.sectorID+".");
+        System.out.println(Colors.RED+"[Taks] "+last.taskID+ " has been removed from sector "+ last.sectorID+"."+Colors.RESET);
     }
     public void systemAudit(){
-        System.out.println("[Audit] Printing Global Sector Index: \n");
         sectors.Traverse();
     }
     public void printDeploymentHistory(){
@@ -63,12 +62,12 @@ public class NEOM_Core {
     }
     public void searchSector(int sectorID){
         AVLNode sector = sectors.Search(sectorID);
-        if(sector == null) System.out.println("[Search] Sector "+sectorID+" not found.");
+        if(sector == null) System.out.println(Colors.PURPLE+"[Search] Sector "+sectorID+" not found."+Colors.RESET);
         else {
-            System.out.println("[Search] Sector " + sectorID + " found.");
+            System.out.println(Colors.PURPLE+"[Search] Sector " + sectorID + " found."+Colors.RESET);
             System.out.println(sector.tasks);
         }
-        System.out.println("[Analytics] N (Total Sectors) = " + sectors.size + " | Comparisons = " + sectors.comparisons);
+        System.out.println(Colors.ORANGERED+"[Analytics] N (Total Sectors) = " + sectors.size + " | Comparisons = " + sectors.comparisons+Colors.RESET);
     }
     public String toString(){
 
