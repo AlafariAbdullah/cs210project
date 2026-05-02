@@ -23,7 +23,7 @@ public class ArchiveList {
         int index = 1;
         TaskNode current = head;
         while(current != null){
-            System.out.println(index + current.taskID + ": "+ current.description+" (Sector"+current.sectorID+")");
+            System.out.println(index +". "+ current.taskID + ": "+ current.description+" (Sector"+current.sectorID+")");
             current = current.next;
             index++;
         }

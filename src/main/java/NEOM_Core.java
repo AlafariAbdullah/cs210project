@@ -40,7 +40,7 @@ public class NEOM_Core {
         else{
             AVLNode sector = sectors.Search(last.sectorID);
             if(sector != null){
-                sector.tasks.Remove(last);
+                sector.tasks.Remove(sector.tasks.Search(last.taskID));
                 if (sector.tasks.size == 0){
                     sectors.Remove(last.sectorID);
                 }
@@ -52,7 +52,7 @@ public class NEOM_Core {
                 if (!current.taskID.equals(last.taskID)) deployment.Enqueue(current);
             }
         }
-        System.out.println(Colors.RED+"[Taks] "+last.taskID+ " has been removed from sector "+ last.sectorID+"."+Colors.RESET);
+        System.out.println(Colors.RED+"[Task] "+last.taskID+ " has been removed from sector "+ last.sectorID+"."+Colors.RESET);
     }
     public void systemAudit(){
         sectors.Traverse();
