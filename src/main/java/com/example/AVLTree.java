@@ -94,6 +94,21 @@ public class AVLTree { //open for any attributes or methods
         }
         return null;
     }
+    public void Traverse(){ // print all using in-order
+        TraverseRecursive(this.root);
+    }
+    public void TraverseRecursive(AVLNode node){
+        if (node == null) return;
+        TraverseRecursive(node.left);
+        System.out.println(
+            "Sector: " + node.sectorID +
+            " | Height: " + node.height +
+            " | Left: " + (node.left == null ? "null" : node.left.sectorID) +
+            " | Right: " + (node.right == null ? "null" : node.right.sectorID)
+        );
+        TraverseRecursive(node.right);
+    }
+    
     private AVLNode balance(AVLNode node){
         if(node == null) return null;
         int factor = height(node.left) - height(node.right);
