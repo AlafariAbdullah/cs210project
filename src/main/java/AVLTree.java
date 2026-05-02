@@ -1,6 +1,7 @@
 public class AVLTree { //open for any attributes or methods
     AVLNode root;
     int size;
+    int comparisons;
     // Left is smaller, right is bigger
     public AVLTree(){
         this.root = null;
@@ -78,11 +79,13 @@ public class AVLTree { //open for any attributes or methods
         return node;
     }
     public AVLNode Search(int sectorID){
+        this.comparisons = 0;
         if (this.root == null){
             return null;
         }
         AVLNode current = this.root;
         while(current != null){
+            this.comparisons++;
             if(current.sectorID == sectorID){
                 return current;
             } else if (sectorID > current.sectorID){
@@ -100,10 +103,8 @@ public class AVLTree { //open for any attributes or methods
         if (node == null) return;
         TraverseRecursive(node.left);
         System.out.println(
-            "Sector: " + node.sectorID +
-            " | Height: " + node.height +
-            " | Left: " + (node.left == null ? "null" : node.left.sectorID) +
-            " | Right: " + (node.right == null ? "null" : node.right.sectorID)
+            "-- Sector " + node.sectorID +": "+
+            node.tasks.toString()
         );
         TraverseRecursive(node.right);
     }

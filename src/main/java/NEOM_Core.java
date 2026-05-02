@@ -13,10 +13,12 @@ public class NEOM_Core {
         sectors.Insert(sectorID);
         AVLNode sector = sectors.Search(sectorID);
         if (sector == null) return;
-        TaskNode task = new TaskNode(sectorID, taskID, desc);
-        sector.tasks.Insert(task);
-        deployment.Enqueue(task);
-        undoLog.Push(task);
+        TaskNode sectorTask = new TaskNode(sectorID, taskID, desc);
+        TaskNode queueTask = new TaskNode(sectorID, taskID, desc);
+        TaskNode stackTask = new TaskNode(sectorID, taskID, desc);
+        sector.tasks.Insert(sectorTask);
+        deployment.Enqueue(queueTask);
+        undoLog.Push(stackTask);
     }
     public void processNextTask(){
         TaskNode current = deployment.Dequeue();
@@ -25,9 +27,12 @@ public class NEOM_Core {
         if (sector == null) return;
         TaskNode task = sector.tasks.Search(current.taskID);
         if (task == null) return;
-        task.description = task.description + " (Completed)";
         TaskNode archive = new TaskNode(task.sectorID, task.taskID,task.description);
+        System.out.println("[Deployment] Drone dispatched for Task "+task.taskID+ "("+task.description+").");
+        task.description ="Completed";
+
         history.Append(archive);
+        System.out.println("[Archive] "+ task.taskID +" Saved to Deployment History.");
     }
     public void undoLastAction(){
         TaskNode last = undoLog.Pop();
@@ -47,8 +52,10 @@ public class NEOM_Core {
                 if (!current.taskID.equals(last.taskID)) deployment.Enqueue(current);
             }
         }
+        System.out.println("[Taks] "+last.taskID+ " has been removed from sector "+ last.sectorID+".");
     }
     public void systemAudit(){
+        System.out.println("[Audit] Printing Global Sector Index: \n");
         sectors.Traverse();
     }
     public void printDeploymentHistory(){
@@ -56,11 +63,12 @@ public class NEOM_Core {
     }
     public void searchSector(int sectorID){
         AVLNode sector = sectors.Search(sectorID);
-        if(sector == null) System.out.println("Sector "+sectorID+" not found.");
+        if(sector == null) System.out.println("[Search] Sector "+sectorID+" not found.");
         else {
-            System.out.println("Sector " + sectorID + " found.");
+            System.out.println("[Search] Sector " + sectorID + " found.");
             System.out.println(sector.tasks);
         }
+        System.out.println("[Analytics] N (Total Sectors) = " + sectors.size + " | Comparisons = " + sectors.comparisons);
     }
     public String toString(){
 

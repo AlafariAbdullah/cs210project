@@ -9,6 +9,11 @@ public class Solution {
         Scanner input = new Scanner(System.in);
 
         while(input.hasNext()){
+            if(!input.hasNextInt()){
+                System.out.println("[Error] Invalid commnad\t (1-6)");
+                input.next();
+                continue;
+            }
             int command = input.nextInt();
 
             switch(command){
@@ -24,6 +29,7 @@ public class Solution {
                     break;
 
                 case 3:
+                    System.out.println("[Undo] Reversing last action...");
                     system.undoLastAction();
                     break;
 
@@ -32,6 +38,7 @@ public class Solution {
                     break;
 
                 case 5:
+                    System.out.println("[Deployment History]");
                     system.printDeploymentHistory();
                     break;
 
@@ -53,7 +60,8 @@ public class Solution {
             while(fileScanner.hasNextLine()){ 
                 String line = fileScanner.nextLine(); 
                 if(line.trim().isEmpty()) continue; 
-                String[] parts = line.split(","); 
+                String[] parts = line.split(",", 3); 
+                if(parts.length < 3) continue;
                 system.addTask(Integer.parseInt(parts[0].trim()), parts[1].trim(), parts[2].trim());
                 count++;
             }

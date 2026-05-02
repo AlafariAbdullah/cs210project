@@ -62,7 +62,7 @@ public class SList {
         String result = "";
         TaskNode current = this.head;
         while(current != null){
-            result += current.taskID + " " + current.description + "\n";
+            result += "-> [" + current.taskID + ": " + current.description + "]";
             current = current.next;
         }
         return result;
