@@ -1,5 +1,3 @@
-package com.example;
-
 public class AVLNode {
     int sectorID;
     int height;

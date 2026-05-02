@@ -1,5 +1,3 @@
-package com.example;
-
 public class AVLTree { //open for any attributes or methods
     AVLNode root;
     int size;

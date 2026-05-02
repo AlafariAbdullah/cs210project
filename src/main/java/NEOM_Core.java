@@ -1,5 +1,3 @@
-package com.example;
-
 public class NEOM_Core {
     AVLTree sectors;
     TaskQueue deployment;

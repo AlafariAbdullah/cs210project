@@ -1,5 +1,3 @@
-package com.example;
-
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -16,7 +14,9 @@ public class Solution {
             switch(command){
                 case 1:
                     String filename = input.next();
-                    bulkAddTasks(system, filename);
+                    System.out.println("[System] Reading "+ filename +" ...");
+                    int count = bulkAddTasks(system, filename);
+                    System.out.println("[System] "+count+ " tasks indexed successfully.");
                     break;
 
                 case 2:
@@ -45,7 +45,8 @@ public class Solution {
             }
         }
     }
-    private static void bulkAddTasks(NEOM_Core system, String filename){
+    private static int bulkAddTasks(NEOM_Core system, String filename){
+        int count = 0;
         try{
             File file = new File(filename);
             Scanner fileScanner = new Scanner(file);
@@ -54,12 +55,13 @@ public class Solution {
                 if(line.trim().isEmpty()) continue; 
                 String[] parts = line.split(","); 
                 system.addTask(Integer.parseInt(parts[0].trim()), parts[1].trim(), parts[2].trim());
+                count++;
             }
-            fileScanner.close();
         } catch(FileNotFoundException e){
     
             System.out.println("File not found: " + filename);
     
         }    
+        return count;
     }
 }
