@@ -10,7 +10,7 @@ public class Solution {
 
         while(input.hasNext()){
             if(!input.hasNextInt()){
-                System.out.println("[Error] Invalid commnad\t (1-6)");
+                System.out.println(Colors.RED + "[Error] Invalid commnad\t (1-6)"+ Colors.RESET);
                 input.next();
                 continue;
             }

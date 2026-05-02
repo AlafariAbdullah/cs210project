@@ -20,10 +20,12 @@ public class ArchiveList {
         size++;
     }
     public void Traverse(){
+        int index = 1;
         TaskNode current = head;
         while(current != null){
-            System.out.println(current.taskID + " "+ current.description);
+            System.out.println(index + current.taskID + ": "+ current.description+" (Sector"+current.sectorID+")");
             current = current.next;
+            index++;
         }
     }
 }
