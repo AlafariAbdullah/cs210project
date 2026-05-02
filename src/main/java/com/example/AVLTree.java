@@ -54,11 +54,11 @@ public class AVLTree { //open for any attributes or methods
             } else if (node.left == null){ // One Child -> Right
                 this.size --;
                 return node.right;
-            } else if (node.right == null){ // One Chile -> Left
+            } else if (node.right == null){ // One Child -> Left
                 this.size--;
                 return node.left;
             }
-            else{ // Two Childrent : Minimum Value of Right Subtree
+            else{ // Two children : Minimum Value of Right Subtree
                 AVLNode current = node.right; // choosing successor
                 while (current.left != null){
                     current = current.left;
@@ -66,7 +66,7 @@ public class AVLTree { //open for any attributes or methods
                 node.sectorID = current.sectorID;
                 node.tasks = current.tasks;
                 node.right= RemoveRecursive(node.right, current.sectorID);
-                return node; // deleting the successor from the position bellow will decrement, no siz--
+                 // deleting the successor from the position below will decrement, no size--
             }
         }
         else if(sectorID > node.sectorID){
@@ -76,6 +76,7 @@ public class AVLTree { //open for any attributes or methods
             node.left = RemoveRecursive(node.left, sectorID);
         }
         node.height = 1 + max(height(node.left), height(node.right));
+        node = balance(node);
         return node;
     }
     public AVLNode Search(int sectorID){
@@ -97,7 +98,7 @@ public class AVLTree { //open for any attributes or methods
     public void Traverse(){ // print all using in-order
         TraverseRecursive(this.root);
     }
-    public void TraverseRecursive(AVLNode node){
+    private void TraverseRecursive(AVLNode node){
         if (node == null) return;
         TraverseRecursive(node.left);
         System.out.println(
