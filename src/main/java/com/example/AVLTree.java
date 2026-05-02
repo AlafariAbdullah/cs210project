@@ -8,7 +8,7 @@ public class AVLTree { //open for any attributes or methods
         this.root = null;
         this.size = 0;
     }
-    public void Insert(int sectorID){
+        public void Insert(int sectorID){
         this.root = InsertRecursive(this.root, sectorID);
     }
     private AVLNode InsertRecursive(AVLNode node, int sectorID){
