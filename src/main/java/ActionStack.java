@@ -7,13 +7,14 @@ public class ActionStack {
     }
     public void Push(TaskNode node){
         node.next = top;
-        top = node;   
-        size++;
+        this.top = node;   
+        this.size++;
     }
     public TaskNode Pop(){
-        TaskNode current = top;
-        top = top.next;
-        size--;
+        if (this.top == null) return null;
+        TaskNode current = this.top;
+        this.top = this.top.next;
+        this.size--;
         current.next = null;
         return current;
     }
